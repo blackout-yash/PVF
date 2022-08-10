@@ -24,6 +24,16 @@ int minCost(int n) {
 	for (int i = n; i > 0; i--) {
 		for (int j = i + 1; j <= n; j++) {
 			int ans = 1e9;
+
+			// here, consider only for substring from i to j, i.e. 234 if i == 2 && j == 4
+			// for 234, there will be 3 case:
+
+			// Case 1: root = 2, left = NULL, right = 34
+			// Case 2: root = 3, left = 2, right = 4
+			// Case 3: root = 4, left = 23, right = NULL
+
+			// k is for checking all possible roots
+
 			for (int k = i; k <= j; k++) {
 				int left = dp[i][k - 1] + sum(i, k - 1);
 				int right = dp[k + 1][j] + sum(k + 1, j);
